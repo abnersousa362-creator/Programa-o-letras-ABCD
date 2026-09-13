@@ -1,0 +1,162 @@
+<html><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>LETRA B V4 LIMPO</title><style>body{margin:0;background:#c8ddd1;font-family:Arial}.a{max-width:560px;margin:auto;background:#0e3d4f;min-height:100vh;padding:10px}.top{background:#0e3d4f;color:#fff;padding:10px;text-align:center;border-bottom:2px solid #ffde59}.top h1{color:#ffde59;font-size:15px;margin:4px 0}.cfg{background:#fff;border-radius:10px;padding:10px;margin:8px 0;display:grid;grid-template-columns:1fr 1fr;gap:6px}.cfg input,.cfg select{padding:7px;border:1px solid #b7cdbd;border-radius:6px;font-size:11px}.s{background:#e3eee6;border-radius:10px;padding:8px;margin:8px 0}.s b{font-size:12px;color:#0e3d4f;display:block;border-bottom:2px solid #0e3d4f;margin-bottom:4px}.l{display:grid;grid-template-columns:105px 45px 1fr 50px 28px;gap:2px;font-size:7.5px;padding:6px 0;border-bottom:1px solid #c2d6c7;align-items:center}.f{background:#fff;border-radius:10px;padding:10px;margin:10px 0}input,select,textarea{width:100%;padding:8px;border:1px solid #b7cdbd;border-radius:7px;margin-bottom:5px;font-size:11px}.btn{padding:11px;border:none;border-radius:9px;width:100%;font-weight:bold;margin-top:5px}.ok{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#00b050;color:#fff;padding:10px 20px;border-radius:20px;font-weight:bold;display:none;z-index:100}</style></head><body><div id=ok class=ok>✓ SALVO! CAMPOS LIMPOS</div><div class=a><div class=top><h1 id=titulo>PROGRAMACAO DIARIA - LETRA B</h1><div id=cab style=font-size:9px></div><div style=font-size:7px;color:#ffde59;margin-top:4px>TOQUE NO EQUIPAMENTO PARA CORRIGIR</div></div><div class=cfg><input id=cfg_letra value="B"><input id=cfg_data type=date><select id=cfg_jornada><option>06:00-18:00</option><option selected>18:00-06:00</option></select><input id=cfg_sup value="Eniel Martins"><input id=cfg_enc value="Cristiano Celestino"><input id=cfg_tec1 placeholder="Tecnico Vale 1"><input id=cfg_tec2 placeholder="Tecnico Vale 2"><button class=btn style=background:#1b8a3d;color:#fff;grid-column:1/-1 onclick=saveCfg()>ATUALIZAR CABECALHO</button></div><div id=p></div><div class=f><b id=fTitle style=color:#0e3d4f>➕ Adicionar Novo Equipamento:</b><select id=tt><option>ESCAVADEIRA HIDRAULICA</option><option>ESCAVADEIRA LONG REACH</option><option>TRATOR MEDIO PORTE</option><option>TRATOR PEQUENO PORTE</option><option>MOTONIVELADORA</option><option>RETROESCAVADEIRA</option><option>CARREGADEIRA DE RODAS</option><option>CAMINHAO BASCULA</option><option>CAMINHAO PIPA</option><option>ROMPEDOR</option><option>COMBOIO</option><option>MICRO ONIBUS</option><option>CAMINHONETE</option><option>CARRETA PRANCHA</option></select><input id=ii placeholder="ID - ex: TRB 0870"><input id=oo placeholder="Operador"><select id=ss><option>EM OPERACAO</option><option>EM MANUTENCAO</option></select><select id=dd style=border:2px solid #ff8c00;background:#fff8e1><option value="SIM">DIRETRIZ MAPEADA: SIM</option><option value="NAO">DIRETRIZ MAPEADA: NAO</option></select><input id=rr placeholder="Regiao"><textarea id=aa placeholder="Atividade"></textarea><button id=bSave class=btn style=background:#0e3d4f;color:#ffde59 onclick=A()>SALVAR NO QUADRO</button><div style=display:grid;grid-template-columns:1fr 1fr;gap:5px><button class=btn style=background:#aaa onclick=C()>CANCELAR / LIMPAR</button><button class=btn style=background:#b92a2a;color:#fff onclick=X()>EXCLUIR</button></div><button class=btn style=background:#00b050;color:#fff onclick=L()>💾 SALVAR ARQUIVO FINAL P/ GRUPO</button><div id=ll style=display:none;background:#fff8cc;padding:10px;margin-top:8px;border-radius:8px;font-size:10px></div></div></div><script>let CFG={letra:"B",data:"",jornada:"18:00-06:00",sup:"Eniel Martins",enc:"Cristiano Celestino",tec1:"",tec2:""};let D=[];let editIdx=-1;function upCab(){let dt=CFG.data?CFG.data.split("-").reverse().join("/"):new Date().toLocaleDateString('pt-BR');titulo.innerHTML=`PROGRAMACAO DIARIA - LETRA ${CFG.letra.toUpperCase()}`;let tecs="";if(CFG.tec1||CFG.tec2)tecs=`<br>TECNICOS: ${CFG.tec1} ${CFG.tec2?"/ "+CFG.tec2:""}`;cab.innerHTML=`DATA: ${dt} - ${CFG.jornada}<br>SUP: ${CFG.sup} - ENC: ${CFG.enc}${tecs}`;}function saveCfg(){CFG={letra:cfg_letra.value||"B",data:cfg_data.value||CFG.data,jornada:cfg_jornada.value,sup:cfg_sup.value,enc:cfg_enc.value,tec1:cfg_tec1.value,tec2:cfg_tec2.value};upCab();showOk("CABEÇALHO ATUALIZADO!")}function showOk(t){ok.innerText=t;ok.style.display='block';setTimeout(()=>ok.style.display='none',2000)}function R(){upCab();let G={};D.forEach((x,i)=>{if(!G[x[2]])G[x[2]]=[];G[x[2]].push([x,i])});let h="";if(D.length==0)h="<div style=background:#fff8cc;padding:10px;text-align:center;border-radius:8px;font-size:11px>Quadro vazio - comece a adicionar os equipamentos</div>";for(let k in G){h+=`<div class=s><b>${k} (${G[k].length})</b>`;G[k].forEach(([e,i])=>{let c=e[3]=="MAN"?"#b92a2a":"#1b8a3d";let dc=e[6]=="SIM"?"#1b8a3d":"#b92a2a";h+=`<div class=l onclick=E(${i})><span style=color:${c}>● ${e[0]} ${e[1]}</span><span>${e[3]}</span><span><b>${e[4]}</b><br>${e[5]}</span><span style=background:${dc};color:#fff;padding:2px 3px;border-radius:3px>${e[6]=="SIM"?"SIM":"NAO"}</span><span>✏️</span></div>`});h+=`</div>`}p.innerHTML=h}function limparCampos(){ii.value="";oo.value="";rr.value="";aa.value="";dd.value="SIM";ss.value="EM OPERACAO";editIdx=-1;fTitle.innerHTML="➕ Adicionar Novo Equipamento:";bSave.innerHTML="SALVAR NO QUADRO";bSave.style.background="#0e3d4f";}function E(i){editIdx=i;let e=D[i];ii.value=e[0];oo.value=e[1];tt.value=e[2];ss.value=e[3]=="OP"?"EM OPERACAO":"EM MANUTENCAO";rr.value=e[4];aa.value=e[5];dd.value=e[6]||"SIM";fTitle.innerHTML=`✏️ EDITANDO: ${e[0]} - Altere e clique ATUALIZAR`;bSave.innerHTML=`ATUALIZAR ${e[0]}`;bSave.style.background="#b92a2a";window.scrollTo(0,document.body.scrollHeight)}function C(){limparCampos();showOk("CAMPOS LIMPOS!")}function A(){if(!ii.value.trim())return alert("Digite o ID do TRB");let o=[ii.value.toUpperCase().trim(),oo.value.trim(),tt.value,ss.value=="EM OPERACAO"?"OP":"MAN",rr.value.toUpperCase().trim(),aa.value.trim(),dd.value];if(editIdx>=0){D[editIdx]=o;showOk(`${o[0]} ATUALIZADO!`)}else{let j=D.findIndex(x=>x[0]==o[0]);if(j>=0){if(confirm(`${o[0]} já existe. Atualizar?`)){D[j]=o;showOk(`${o[0]} ATUALIZADO!`)}else return}else{D.push(o);showOk(`${o[0]} ADICIONADO!`)}}limparCampos();R();ii.focus()}function X(){let id=editIdx>=0?D[editIdx][0]:ii.value.toUpperCase().trim();if(!id)return alert("Selecione um equipamento no quadro ou digite o ID para excluir");let j=D.findIndex(x=>x[0]==id);if(j>=0&&confirm(`Excluir ${id}?`)){D.splice(j,1);limparCampos();R();showOk(`${id} EXCLUIDO`)}}function L(){
+if(D.length==0)return alert("Adicione pelo menos 1 equipamento!");
+
+/* Gera um PDF real diretamente no navegador, sem depender da tela de impressao. */
+function pdfEscape(s){
+  return String(s||"")
+    .replace(/\\/g,"\\\\").replace(/\(/g,"\\(").replace(/\)/g,"\\)")
+    .replace(/[^\x20-\x7E]/g,"");
+}
+function ascii(s){
+  return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^\x20-\x7E]/g,"");
+}
+function wrap(text,max){
+  text=ascii(text);
+  if(!text)return [""];
+  let words=text.split(/\s+/), out=[], line="";
+  words.forEach(word=>{
+    if((line+" "+word).trim().length<=max) line=(line+" "+word).trim();
+    else { if(line)out.push(line); line=word; }
+  });
+  if(line)out.push(line);
+  return out.length?out:[""];
+}
+function makePDF(){
+  let pages=[], page=[], y=800;
+  function newPage(){ if(page.length)pages.push(page); page=[]; y=800; }
+  function text(s,x,yy,size,bold){
+    page.push({t:ascii(s),x:x,y:yy,size:size||9,b:bold});
+  }
+  function line(x1,y1,x2,y2){
+    page.push({line:[x1,y1,x2,y2]});
+  }
+  function header(){
+    text("PROGRAMACAO DIARIA - LETRA "+CFG.letra.toUpperCase(),40,y,15,true); y-=22;
+    let dt=CFG.data?CFG.data.split("-").reverse().join("/"):new Date().toLocaleDateString("pt-BR");
+    text("DATA: "+dt+" - "+CFG.jornada,40,y,9,false); y-=13;
+    text("SUP: "+(CFG.sup||"")+" - ENC: "+(CFG.enc||""),40,y,9,false); y-=13;
+    if(CFG.tec1||CFG.tec2){text("TECNICOS: "+(CFG.tec1||"")+" "+(CFG.tec2?"/ "+CFG.tec2:""),40,y,9,false);y-=13;}
+    line(40,y,555,y); y-=15;
+  }
+  header();
+
+  let G={};
+  D.forEach(e=>{if(!G[e[2]])G[e[2]]=[];G[e[2]].push(e);});
+
+  for(let tipo in G){
+    if(y<95){newPage();header();}
+    text(tipo+" ("+G[tipo].length+")",40,y,11,true); y-=16;
+    line(40,y,555,y); y-=14;
+
+    // Colunas: equipamento/operador, status, regiao/atividade, diretriz
+    text("EQUIPAMENTO / OPERADOR",40,y,7,true);
+    text("STATUS",185,y,7,true);
+    text("REGIAO / ATIVIDADE",275,y,7,true);
+    text("DIRETRIZ",505,y,7,true);
+    y-=11; line(40,y,555,y); y-=10;
+
+    for(let e of G[tipo]){
+      let equip=wrap(e[0]+" "+(e[1]||""),25);
+      let info=wrap((e[4]||"")+" / "+(e[5]||""),35);
+      let rows=Math.max(equip.length,info.length,1);
+      let h=rows*11+5;
+      if(y-h<45){newPage();header();text(tipo+" (contin.)",40,y,11,true);y-=16;}
+      for(let r=0;r<rows;r++){
+        if(equip[r])text(equip[r],40,y,7.5,r===0);
+        if(r===0)text(e[3]=="MAN"?"EM MANUTENCAO":"EM OPERACAO",185,y,7.5,false);
+        if(info[r])text(info[r],275,y,7.5,r===0);
+        if(r===0)text(e[6]=="SIM"?"SIM":"NAO",510,y,7.5,true);
+        y-=11;
+      }
+      line(40,y+3,555,y+3); y-=5;
+    }
+    y-=8;
+  }
+
+  if(y<45){newPage();header();}
+  text("TOTAL DE EQUIPAMENTOS: "+D.length,40,y,8,true);
+
+  if(page.length)pages.push(page);
+
+  // Montagem do PDF
+  let objects=[];
+  function add(obj){objects.push(obj);return objects.length;}
+  let catalog=add(""), pagesObj=add(""), font=add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>");
+  let pageNums=[];
+  let contentNums=[];
+
+  pages.forEach(pg=>{
+    let stream="q\n";
+    pg.forEach(o=>{
+      if(o.line){
+        stream+=o.line[0]+" "+o.line[1]+" m "+o.line[2]+" "+o.line[3]+" l S\n";
+      }else{
+        stream+="BT\n/F1 "+o.size+" Tf\n"+o.x+" "+o.y+" Td\n("+pdfEscape(o.t)+") Tj\nET\n";
+      }
+    });
+    stream+="Q\n";
+    let content=add("<< /Length "+stream.length+" >>\nstream\n"+stream+"endstream");
+    contentNums.push(content);
+    let p=add("");
+    pageNums.push(p);
+  });
+
+  objects[catalog-1]="<< /Type /Catalog /Pages "+pagesObj+" 0 R >>";
+  objects[pagesObj-1]="<< /Type /Pages /Kids ["+pageNums.map(n=>n+" 0 R").join(" ")+"] /Count "+pageNums.length+" >>";
+  pageNums.forEach((n,i)=>{
+    objects[n-1]="<< /Type /Page /Parent "+pagesObj+" 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 "+font+" 0 R >> >> /Contents "+contentNums[i]+" 0 R >>";
+  });
+
+  let pdf="%PDF-1.4\n%\xE2\xE3\xCF\xD3\n", offsets=[0];
+  objects.forEach((obj,i)=>{
+    offsets.push(pdf.length);
+    pdf+=(i+1)+" 0 obj\n"+obj+"\nendobj\n";
+  });
+  let xref=pdf.length;
+  pdf+="xref\n0 "+(objects.length+1)+"\n0000000000 65535 f \n";
+  for(let i=1;i<offsets.length;i++)pdf+=String(offsets[i]).padStart(10,"0")+" 00000 n \n";
+  pdf+="trailer\n<< /Size "+(objects.length+1)+" /Root "+catalog+" 0 R >>\nstartxref\n"+xref+"\n%%EOF";
+
+  let bytes=new Uint8Array(pdf.length);
+  for(let i=0;i<pdf.length;i++)bytes[i]=pdf.charCodeAt(i)&255;
+  return new Blob([bytes],{type:"application/pdf"});
+}
+
+let blob=makePDF();
+let nome=`PROGRAMACAO_LETRA_${CFG.letra}_${(CFG.data||"").replace(/-/g,"")||"SEM_DATA"}.pdf`;
+let url=URL.createObjectURL(blob);
+
+/* Mostra um link real de download. O clique automatico e apenas uma tentativa;
+   o link permanece visivel para que o usuario possa clicar e o Chrome salvar
+   o PDF na pasta Downloads caso bloqueie o clique automatico. */
+ll.style.display="block";
+ll.innerHTML="";
+let tituloDownload=document.createElement("b");
+tituloDownload.textContent="✓ PDF PRONTO PARA BAIXAR";
+ll.appendChild(tituloDownload);
+ll.appendChild(document.createElement("br"));
+let nomeInfo=document.createElement("span");
+nomeInfo.textContent=`Arquivo: ${nome}`;
+ll.appendChild(nomeInfo);
+ll.appendChild(document.createElement("br"));
+ll.appendChild(document.createElement("br"));
+
+let a=document.createElement("a");
+a.href=url;
+a.download=nome;
+a.textContent="⬇ BAIXAR PDF AGORA";
+a.style.cssText="display:block;background:#0e3d4f;color:#ffde59;padding:12px;text-align:center;border-radius:8px;text-decoration:none;font-weight:bold;font-size:12px;cursor:pointer";
+ll.appendChild(a);
+
+/* Tenta iniciar o download imediatamente. Se o Chrome bloquear,
+   o botao acima continua disponivel e o segundo clique e uma acao direta do usuario. */
+try{a.click()}catch(e){}
+
+let aviso=document.createElement("div");
+aviso.style.cssText="margin-top:8px;font-size:9px;color:#5a4a00";
+aviso.textContent="Se nao aparecer em Downloads automaticamente, clique em BAIXAR PDF AGORA.";
+ll.appendChild(aviso);
+
+setTimeout(()=>URL.revokeObjectURL(url),120000);
+}let qs=new URLSearchParams(location.search);if(qs.has("p")){try{let pack=JSON.parse(decodeURIComponent(qs.get("p")));if(pack.c){CFG=pack.c;cfg_letra.value=CFG.letra;cfg_data.value=CFG.data;cfg_jornada.value=CFG.jornada;cfg_sup.value=CFG.sup;cfg_enc.value=CFG.enc;cfg_tec1.value=CFG.tec1||"";cfg_tec2.value=CFG.tec2||""}if(pack.d)D=pack.d}catch(e){}}if(!cfg_data.value){let t=new Date().toISOString().split('T')[0];cfg_data.value=t;CFG.data=t}R();</script></body></html>
